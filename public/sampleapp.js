@@ -5,8 +5,11 @@ angular.module('sampleapp', [])
       restrict: 'E',
       transclude: true,
       templateUrl: 'list.html',
-      link: function(scope) {
+      link: function(scope, element, attrs) {
          scope.state = {selected: ''};
+
+         if (attrs.default)
+            scope.state.selected = attrs.default;
       }
    }
 })
@@ -19,9 +22,6 @@ angular.module('sampleapp', [])
       templateUrl: 'item.html',
       link: function(scope, element, attrs) {
          scope.id = attrs.id;
-
-         if (attrs.default)
-            scope.state.selected = scope.id;
 
          scope.select = function() {
             scope.state.selected = scope.id;
